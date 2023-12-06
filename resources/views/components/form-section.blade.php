@@ -1,24 +1,25 @@
-@props(['submit'])
+@props(['action','submit', 'enctype' => ''])
 
-<div {{ $attributes->merge(['class' => 'md:grid md:grid-cols-3 md:gap-6']) }}>
-    <x-section-title>
-        <x-slot name="title">{{ $title }}</x-slot>
-        <x-slot name="description">{{ $description }}</x-slot>
-    </x-section-title>
+<div>
+    <header>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+            {{ $title }}
+        </h2>
 
-    <div class="mt-5 md:mt-0 md:col-span-2">
-        <form wire:submit="{{ $submit }}">
-            <div class="px-4 py-5 bg-white sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
-                <div class="grid grid-cols-6 gap-6">
-                    {{ $form }}
-                </div>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            {{ $description }}
+        </p>
+    </header>
+    <x-section-border />
+    <form action="{{ $action }}" method="POST" {{ $attributes->merge(['enctype' => $enctype]) }}>
+        <div class="mt-6 grid grid-cols-6 gap-6">
+            {{ $form }}
+        </div>
+
+        @if (isset($actions))
+            <div class="flex items-center justify-end text-right mt-5">
+                {{ $actions }}
             </div>
-
-            @if (isset($actions))
-                <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-end sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md">
-                    {{ $actions }}
-                </div>
-            @endif
-        </form>
-    </div>
+        @endif
+    </form>
 </div>
