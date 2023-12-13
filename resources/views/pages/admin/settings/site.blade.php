@@ -11,7 +11,7 @@
                     <section>
                     <x-form-section action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
                             <x-slot name="title">
-                                {{ __('Setting') }}
+                                {{ __('Settings') }}
                             </x-slot>
 
                             <x-slot name="description">
@@ -55,29 +55,30 @@
                                     <x-input-error :messages="$errors->get('site_description')" class="mt-1" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">
+                                    <x-input-label for="address" value="{{ __('Address') }}" />
+                                    <x-input-text-area class="mt-1 w-full" id="address" name="address" placeholder="address" cols="4" rows="3" :value="old('address', $data['address'])" />
+                                    <x-input-error :messages="$errors->get('address')" class="mt-1" />
+                                </div>
+                                <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="copyright" :value="__('Copyright')" />
                                     <x-text-input id="copyright" name="copyright" type="text" class="mt-1 block w-full" :value="old('copyright', $data['copyright'])" required autofocus autocomplete="copyright" />
                                     <x-input-error class="mt-2" :messages="$errors->get('copyright')" />
                                 </div>
-
                                 <div class="col-span-3 sm:col-span-3">
                                     <x-input-label for="facebook" value="{{ __('Facebook') }}" />
                                     <x-text-icon-input id="facebook" type="text" class="mt-1 block w-full" name="facebook" :value="old('facebook', $data['facebook'])" placeholder="facebook" autocomplete="facebook" icon="brand-facebook"/>
                                     <x-input-error :messages="$errors->get('facebook')" class="mt-1" />
                                 </div>
-
                                 <div class="col-span-3 sm:col-span-3">
                                     <x-input-label for="instagram" value="{{ __('Instagram') }}" />
                                     <x-text-icon-input id="instagram" type="text" class="mt-1 block w-full" name="instagram" :value="old('instagram', $data['instagram'])" placeholder="instagram" autocomplete="instagram" icon="brand-instagram"/>
                                     <x-input-error :messages="$errors->get('instagram')" class="mt-1" />
                                 </div>
-
                                 <div class="col-span-3 sm:col-span-3">
                                     <x-input-label for="twitter" value="{{ __('Twitter') }}" />
                                     <x-text-icon-input id="twitter" type="text" class="mt-1 block w-full" name="twitter" :value="old('twitter', $data['twitter'])" placeholder="twitter" autocomplete="twitter" icon="brand-twitter"/>
                                     <x-input-error :messages="$errors->get('twitter')" class="mt-1" />
                                 </div>
-
                                 <div class="col-span-3 sm:col-span-3">
                                     <x-input-label for="email" value="{{ __('Email') }}" />
                                     <x-text-icon-input id="email" type="text" class="mt-1 block w-full" name="email" :value="old('email', $data['email'])" placeholder="email" autocomplete="email" icon="mail"/>

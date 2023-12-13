@@ -42,20 +42,28 @@ class SettingSeeder extends Seeder
                 'value' => 'Rama Can & Fahmi Tri septiyadi',
             ],
             [
+                'key' => 'address',
+                'value' => 'Jl. Raya Cikaret No. 1, Cikaret, Kec. Cikarang Sel., Bekasi, Jawa Barat 17530',
+            ],
+            [
+                'key' => 'about-us',
+                'value' => 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.',
+            ],
+            [
                 'key' => 'logo',
-                'value' => 'images/logo.png',
+                'value' => 'storage/images/logo.png',
             ],
             [
                 'key' => 'banner_1',
-                'value' => 'images/slide-01.jpg',
+                'value' => 'storage/images/slide-01.jpg',
             ],
             [
                 'key' => 'banner_2',
-                'value' => 'images/slide-02.jpg',
+                'value' => 'storage/images/slide-02.jpg',
             ],
             [
                 'key' => 'banner_3',
-                'value' => 'images/slide-03.jpg',
+                'value' => 'storage/images/slide-03.jpg',
             ]
         ];
 

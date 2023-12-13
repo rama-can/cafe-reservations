@@ -11,7 +11,7 @@
                     <section>
                     <x-form-section action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
                             <x-slot name="title">
-                                {{ __('Setting') }}
+                                {{ __('Settings') }}
                             </x-slot>
 
                             <x-slot name="description">

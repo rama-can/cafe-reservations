@@ -32,6 +32,13 @@ class SettingController extends Controller
         ]);
     }
 
+    public function about()
+    {
+        return view('pages.admin.settings.about', [
+            'data' => \App\Models\Setting::where('key', 'about-us')->value('value')
+        ]);
+    }
+
     /**
      * Update the settings.
      *
@@ -47,6 +54,8 @@ class SettingController extends Controller
             'banner_3' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'site_name' => 'nullable|string|max:255',
             'site_description' => 'nullable|max:255',
+            'about-us' => 'nullable|string',
+            'address' => 'nullable|string|max:255',
             'copyright' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',
             'twitter' => 'nullable|string|max:255',

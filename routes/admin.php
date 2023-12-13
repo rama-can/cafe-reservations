@@ -15,6 +15,7 @@ Route::middleware('auth', 'verified')
      */
     Route::get('/settings/site', 'Admin\SettingController@site')->name('settings.site');
     Route::get('/settings/banner', 'Admin\SettingController@banner')->name('settings.banner');
+    Route::get('/settings/about', 'Admin\SettingController@about')->name('settings.about');
     Route::patch('/settings/update', 'Admin\SettingController@update')->name('settings.update');
 
     /**

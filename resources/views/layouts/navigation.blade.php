@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('admin.dashboard') }}">
-                        <img src="{{ Storage::url($getTheme['logo']) }}" alt="Logo" class="block h-9 w-auto">
+                        <img src="{{ url($getTheme['logo']) }}" alt="Logo" class="block h-9 w-auto">
                     </a>
                 </div>
 
@@ -30,6 +30,11 @@
                             <x-dropdown-link :href="route('admin.settings.banner')" :active="request()->routeIs('admin.settings.banner')">
                                 <span class="{{ request()->routeIs('admin.settings.banner') ? 'text-indigo-600' : '' }}">
                                     {{ __('Banner') }}
+                                </span>
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.settings.about')" :active="request()->routeIs('admin.settings.about')">
+                                <span class="{{ request()->routeIs('admin.settings.about') ? 'text-indigo-600' : '' }}">
+                                    {{ __('About') }}
                                 </span>
                             </x-dropdown-link>
                         </x-slot>
