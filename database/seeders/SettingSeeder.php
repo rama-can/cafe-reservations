@@ -45,6 +45,18 @@ class SettingSeeder extends Seeder
                 'key' => 'logo',
                 'value' => 'images/logo.png',
             ],
+            [
+                'key' => 'banner_1',
+                'value' => 'images/slide-01.jpg',
+            ],
+            [
+                'key' => 'banner_2',
+                'value' => 'images/slide-02.jpg',
+            ],
+            [
+                'key' => 'banner_3',
+                'value' => 'images/slide-03.jpg',
+            ]
         ];
 
         foreach ($data as $setting) {

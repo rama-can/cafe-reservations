@@ -1,4 +1,4 @@
-<x-admin-layout>@section('title'){{ __('Setting') }}@endsection
+<x-admin-layout>@section('title'){{ __('Setting Site') }}@endsection
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Setting') }}
@@ -19,7 +19,7 @@
                             </x-slot>
 
                             <x-slot name="form">
-                                @method('PUT')
+                                @method('PATCH')
                                 @csrf
                                 <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="logo" :value="__('Logo')" class="items-center mx-auto text-center" />

@@ -27,6 +27,11 @@
                                     {{ __('Site') }}
                                 </span>
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.settings.banner')" :active="request()->routeIs('admin.settings.banner')">
+                                <span class="{{ request()->routeIs('admin.settings.banner') ? 'text-indigo-600' : '' }}">
+                                    {{ __('Banner') }}
+                                </span>
+                            </x-dropdown-link>
                         </x-slot>
                     </x-nav-link-parent>
                 </div>

@@ -21,6 +21,18 @@ class SettingController extends Controller
     }
 
     /**
+     * Display the site banner page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function banner()
+    {
+        return view('pages.admin.settings.banner', [
+            'data' => \App\Models\Setting::pluck('value', 'key')->toArray()
+        ]);
+    }
+
+    /**
      * Update the settings.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -28,33 +40,48 @@ class SettingController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'site_name' => 'required|string|max:255',
-            'site_description' => 'required|max:255',
-            'copyright' => 'required|string|max:255',
+            'banner_1' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'banner_2' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'banner_3' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'site_name' => 'nullable|string|max:255',
+            'site_description' => 'nullable|max:255',
+            'copyright' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',
             'twitter' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'nullable|email|max:255',
         ]);
 
         try {
-            if ($request->hasFile('logo')) {
-                $logo = $request->file('logo');
-                $fileName = 'logo.'.$logo->getClientOriginalExtension();
-                $filePath = $logo->storeAs('public/images', $fileName);
-                \App\Models\Setting::where('key', 'logo')->update(['value' => $filePath]);
-            }
-            $requestData = $request->except('logo');
+            $settingsToUpdate = [];
 
-            foreach ($requestData as $key => $value) {
+            foreach ($validatedData as $key => $value) {
+                $setting = \App\Models\Setting::where('key', $key)->first();
+
+                if ($setting) {
+                    if ($request->hasFile($key)) {
+                        $file = $request->file($key);
+                        $fileName = $key . '.' . $file->getClientOriginalExtension();
+                        Storage::disk('public')->put('images/' . $fileName, file_get_contents($file));
+                        if (Storage::exists($setting->value)) {
+                            Storage::delete($setting->value);
+                        }
+
+                        $settingsToUpdate[$key] = 'storage/images/' . $fileName;
+                    } else {
+                        $settingsToUpdate[$key] = $value;
+                    }
+                }
+            }
+
+            foreach ($settingsToUpdate as $key => $value) {
                 \App\Models\Setting::where('key', $key)->update(['value' => $value]);
             }
             notify()->success('Settings updated successfully!');
             return redirect()->back();
         } catch (\Throwable $th) {
-            throw $th;
             notify()->error($th->getMessage());
             return redirect()->back();
         }
