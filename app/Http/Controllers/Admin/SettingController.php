@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Storage;
 class SettingController extends Controller
 {
     /**
-     * Display the index page for the SettingController.
+     * Display the site setting page for the SettingController.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function site()
     {
-        return view('pages.admin.settings.index', [
+        return view('pages.admin.settings.site', [
             'data' => \App\Models\Setting::pluck('value', 'key')->toArray()
         ]);
     }

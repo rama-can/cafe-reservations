@@ -13,8 +13,8 @@ Route::middleware('auth', 'verified')
     /**
      * Settings
      */
-    Route::get('/settings', 'Admin\SettingController@index')->name('settings.index');
-    Route::patch('/settings', 'Admin\SettingController@update')->name('settings.update');
+    Route::get('/settings/site', 'Admin\SettingController@site')->name('settings.site');
+    Route::put('/settings/update', 'Admin\SettingController@update')->name('settings.update');
 
     /**
      * Profile

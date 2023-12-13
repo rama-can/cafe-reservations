@@ -7,7 +7,6 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('admin.dashboard') }}">
                         <img src="{{ Storage::url($getTheme['logo']) }}" alt="Logo" class="block h-9 w-auto">
-                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> --}}
                     </a>
                 </div>
 
@@ -16,9 +15,20 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.index')">
+                    {{-- <x-nav-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.index')">
                         {{ __('Settings') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
+
+                    <x-nav-link-parent :href="'#'" :active="request()->routeIs('admin.settings.*')">
+                        <x-slot name="name">{{ __('Settings') }}</x-slot>
+                        <x-slot name="children">
+                            <x-dropdown-link :href="route('admin.settings.site')" :active="request()->routeIs('admin.settings.site')">
+                                <span class="{{ request()->routeIs('admin.settings.site') ? 'text-indigo-600' : '' }}">
+                                    {{ __('Site') }}
+                                </span>
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-nav-link-parent>
                 </div>
             </div>
 
@@ -75,9 +85,9 @@
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.index')">
+            {{-- <x-responsive-nav-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.index')">
                 {{ __('Settings') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link> --}}
         </div>
 
         <!-- Responsive Settings Options -->

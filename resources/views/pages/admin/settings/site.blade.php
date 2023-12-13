@@ -9,7 +9,7 @@
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl items-center mx-auto">
                     <section>
-                        <x-form-section action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
+                    <x-form-section action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
                             <x-slot name="title">
                                 {{ __('Setting') }}
                             </x-slot>
@@ -19,8 +19,8 @@
                             </x-slot>
 
                             <x-slot name="form">
+                                @method('PUT')
                                 @csrf
-                                @method('patch')
                                 <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="logo" :value="__('Logo')" class="items-center mx-auto text-center" />
                                     <div x-data="{ src: '{{ Storage::url($data['logo']) }}', showInfo: false }" class="mt-2 max-w-sm p-6 mb-4 bg-slate-100 dark:bg-slate-900 border-dashed border-2 border-gray-400 dark:border-gray-500 rounded-lg items-center mx-auto text-center">
