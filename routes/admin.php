@@ -19,6 +19,11 @@ Route::middleware('auth', 'verified')
     Route::patch('/settings/update', 'Admin\SettingController@update')->name('settings.update');
 
     /**
+     * Category
+     */
+    Route::resource('/categories', 'Admin\CategoryController')->except('show');
+
+    /**
      * Profile
      */
     Route::get('/profile', 'Admin\ProfileController@edit')->name('profile.edit');

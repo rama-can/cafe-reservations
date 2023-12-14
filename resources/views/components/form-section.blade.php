@@ -12,12 +12,12 @@
     </header>
     <x-section-border />
     <form action="{{ $action }}" method="POST" {{ $attributes->merge(['enctype' => $enctype]) }}>
-        <div class="mt-6 grid grid-cols-6 gap-6">
+        <div class="mt-6 grid grid-cols-6 gap-6 mb-2">
             {{ $form }}
         </div>
-
+        <x-section-border />
         @if (isset($actions))
-            <div class="flex items-center justify-end text-right mt-5">
+            <div class="flex items-center justify-end text-right mt-2">
                 {{ $actions }}
             </div>
         @endif

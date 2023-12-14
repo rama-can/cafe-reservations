@@ -2,17 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Services\HashIdService;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    protected $hashId;
+
+    public function __construct(HashIdService $hashIdService)
+    {
+        $this->hashId = $hashIdService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = Category::get();
+        $hashId = $this->hashId;
+        return view('pages.admin.category.index', compact('categories', 'hashId'));
     }
 
     /**
@@ -20,7 +32,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.category.create');
     }
 
     /**
@@ -28,7 +40,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $vaildated =  $request->validate([
+            'name' => 'required|max:225',
+            'is_active' => 'required|boolean',
+            'image' => 'required|mimes:png,jpeg,jpg|max:2048'
+        ]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = 'thumbnail_categories_'. Date('d_m_Y_His') .'.' . $file->getClientOriginalExtension();
+            $filePath = 'images/food/' . $fileName;
+            Storage::disk('public')->put($filePath, file_get_contents($file));;
+            $vaildated['image'] = $filePath;
+        }
+
+        Category::create($vaildated);
+        notify()->success('Added category successfully!');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -44,7 +71,13 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $hash = $this->hashId;
+        $id = $hash->decode($id);
+        return view('pages.admin.category.edit', [
+            'category' => Category::FindOrFail($id),
+            'hash' => $hash
+        ]);
+
     }
 
     /**
@@ -52,7 +85,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $hashId = $this->hashId->decode($id);
+        $category = Category::FindOrFail($hashId);
+        $vaildated =  $request->validate([
+            'name' => 'required|max:225',
+            'is_active' => 'required|boolean',
+            'image' => 'nullable|mimes:png,jpeg,jpg|max:2048'
+        ]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = 'thumbnail_categories_'. Date('d_m_Y_His') .'.' . $file->getClientOriginalExtension();
+            $filePath = 'images/food/' . $fileName;
+            Storage::disk('public')->put($filePath, file_get_contents($file));;
+            $vaildated['image'] = $filePath;
+            if (Storage::disk('public')->exists($category->image)) {
+                Storage::disk('public')->delete($category->image);
+            }
+        }
+
+        $category->update($vaildated);
+        notify()->success('Updated category successfully!');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -60,6 +113,13 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $Id = $this->hashId->decode($id);
+        $category = Category::FindOrFail($Id);
+        if (Storage::disk('public')->exists($category->image)) {
+            Storage::disk('public')->delete($category->image);
+        }
+        $category->delete();
+        notify()->success('Deleted category successfully!');
+        return redirect()->back();
     }
 }
