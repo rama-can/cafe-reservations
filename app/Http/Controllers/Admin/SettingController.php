@@ -4,10 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
+    protected $settingsData;
+
+    public function __construct()
+    {
+        $this->settingsData = cache()->remember('settings_data', now()->addHours(6), function () {
+            return \App\Models\Setting::pluck('value', 'key')->toArray();
+        });
+    }
+
     /**
      * Display the site setting page for the SettingController.
      *
@@ -16,7 +26,7 @@ class SettingController extends Controller
     public function site()
     {
         return view('pages.admin.settings.site', [
-            'data' => \App\Models\Setting::pluck('value', 'key')->toArray()
+            'data' => $this->settingsData
         ]);
     }
 
@@ -28,14 +38,14 @@ class SettingController extends Controller
     public function banner()
     {
         return view('pages.admin.settings.banner', [
-            'data' => \App\Models\Setting::pluck('value', 'key')->toArray()
+            'data' => $this->settingsData
         ]);
     }
 
     public function about()
     {
         return view('pages.admin.settings.about', [
-            'data' => \App\Models\Setting::where('key', 'about-us')->value('value')
+            'data' => $this->settingsData
         ]);
     }
 
@@ -88,6 +98,7 @@ class SettingController extends Controller
             foreach ($settingsToUpdate as $key => $value) {
                 \App\Models\Setting::where('key', $key)->update(['value' => $value]);
             }
+            Cache::forget('settings_data');
             notify()->success('Settings updated successfully!');
             return redirect()->back();
         } catch (\Throwable $th) {

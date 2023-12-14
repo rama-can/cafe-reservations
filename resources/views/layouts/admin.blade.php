@@ -8,7 +8,7 @@
         <title>@yield('title') | {{ $getTheme['site_name'] }}</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ Storage::url($getTheme['logo']) }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url($getTheme['logo']) }}">
 
         <!-- Scripts -->
         <script src="{{ asset('assets/nprogress/nprogress.js') }}"></script>

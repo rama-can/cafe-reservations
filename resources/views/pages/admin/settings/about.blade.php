@@ -23,7 +23,7 @@
                                 @csrf
                                 <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="about-us" value="{{ __('About') }}" />
-                                    <x-input-text-area class="mt-1 w-full" id="about-us" name="about-us" placeholder="about" cols="4" rows="8" :value="old('about-us', $data)" />
+                                    <x-input-text-area class="mt-1 w-full" id="about-us" name="about-us" placeholder="about" cols="4" rows="8" :value="old('about-us', $data['about-us'])" />
                                     <x-input-error :messages="$errors->get('about-us')" class="mt-1" />
                                 </div>
                             </x-slot>
