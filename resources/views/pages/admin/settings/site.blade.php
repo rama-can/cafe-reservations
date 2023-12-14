@@ -23,7 +23,7 @@
                                 @csrf
                                 <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="logo" :value="__('Logo')" class="items-center mx-auto text-center" />
-                                    <div x-data="{ src: '{{ Storage::url($data['logo']) }}', showInfo: false }" class="mt-2 max-w-sm p-6 mb-4 bg-slate-100 dark:bg-slate-900 border-dashed border-2 border-gray-400 dark:border-gray-500 rounded-lg items-center mx-auto text-center">
+                                    <div x-data="{ src: '{{ url($data['logo']) }}', showInfo: false }" class="mt-2 max-w-sm p-6 mb-4 bg-slate-100 dark:bg-slate-900 border-dashed border-2 border-gray-400 dark:border-gray-500 rounded-lg items-center mx-auto text-center">
                                             <div>
                                                 <figure>
                                                     <img class="max-h-48 rounded-lg mx-auto border-2 border-gray-300" :src="src" alt="" />
