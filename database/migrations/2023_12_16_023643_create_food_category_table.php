@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('food_menus', function (Blueprint $table) {
+        Schema::create('food_category', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
-            $table->string('price');
-            $table->text('description');
-            $table->boolean('is_available')->default(true);
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('food_id');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('food_menus');
+        Schema::dropIfExists('food_category');
     }
 };

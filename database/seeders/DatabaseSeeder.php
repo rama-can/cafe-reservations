@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SettingSeeder::class,
             CategorySeeder::class,
+            FoodSeeder::class,
+            FoodCategorySeeder::class,
         ]);
     }
 }

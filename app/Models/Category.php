@@ -16,6 +16,11 @@ class Category extends Model
         'is_active'
     ];
 
+    public function foods()
+    {
+        return $this->belongsToMany(Food::class, 'food_category');
+    }
+
     public function getImageUrlAttribute()
     {
         if ($this->image && Storage::disk('public')->exists($this->image)) {
