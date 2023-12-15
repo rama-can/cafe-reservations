@@ -22,9 +22,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
-        $hashId = $this->hashId;
-        return view('pages.admin.category.index', compact('categories', 'hashId'));
+        return view('pages.admin.category.index', [
+            'categories' => Category::get(),
+            'hashId' => $this->hashId
+        ]);
     }
 
     /**
