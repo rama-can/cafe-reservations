@@ -24,6 +24,11 @@ Route::middleware('auth', 'verified')
     Route::resource('/categories', 'Admin\CategoryController')->except('show');
 
     /**
+     * Food
+     */
+    Route::resource('/foods', 'Admin\FoodController')->except('show');
+
+    /**
      * Profile
      */
     Route::get('/profile', 'Admin\ProfileController@edit')->name('profile.edit');

@@ -12,6 +12,11 @@ class CategoryController extends Controller
 {
     protected $hashId;
 
+    /**
+     * CategoryController constructor.
+     *
+     * @param HashIdService $hashIdService The HashIdService instance.
+     */
     public function __construct(HashIdService $hashIdService)
     {
         $this->hashId = $hashIdService;
@@ -75,10 +80,9 @@ class CategoryController extends Controller
         $hash = $this->hashId;
         $id = $hash->decode($id);
         return view('pages.admin.category.edit', [
-            'category' => Category::FindOrFail($id),
+            'categories' => Category::FindOrFail($id),
             'hash' => $hash
         ]);
-
     }
 
     /**
