@@ -83,15 +83,19 @@
 
                                                         <td class="px-4 py-4 text-xs font-semibold whitespace-nowrap flex items-center">
                                                             <a href="{{ route('admin.categories.edit', $hashId->encode($data->id)) }}" class="inline-block">
-                                                                <x-secondary-button class="px-0.5 py-0.5 mr-2">
-                                                                    <x-tabler-pencil-plus class="w-6 h-6" />
+                                                                <x-secondary-button class="h-8 w-8 p-1 flex items-center justify-center mr-2">
+                                                                    <span>
+                                                                        <x-tabler-pencil-plus class="text-gray-800 dark:text-gray-400 h-6 w-6" />
+                                                                    </span>
                                                                 </x-secondary-button>
                                                             </a>
-                                                            <x-danger-button class="px-0.5 py-0.5"
+                                                            <x-danger-button class="h-8 w-8 p-1 flex items-center justify-center"
                                                                 x-on:click.prevent="$dispatch('open-modal', 'confirm-category-deletion')"
                                                                 @click="categoryId = '{{ $hashId->encode($data->id) }}';"
                                                             >
-                                                                <x-tabler-trash class="w-6 h-6" />
+                                                                <span>
+                                                                    <x-tabler-trash class="text-gray-800 dark:text-gray-200 h-6 w-6" />
+                                                                </span>
                                                             </x-danger-button>
                                                         </td>
                                                     </tr>
