@@ -6,9 +6,11 @@ $classes = ($active ?? false)
             : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out';
 @endphp
 
-<div x-data="{ open: false }" @click.away="open = false" @close.stop="open = false" @click="open = ! open" {{ $attributes->merge(['class' => $classes]) }} >
+<div x-data="{ open: false }" @click.away="open = false" @close.stop="open = false" @click="open = ! open" {{ $attributes->merge(['class' => $classes]) }}>
     <div>
-        {{ $name }}
+        <button>
+            {{ $name }}
+        </button>
 
         <div class="ml-1 inline-block relative top-1">
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -17,15 +19,17 @@ $classes = ($active ?? false)
         </div>
     </div>
 
-    <div class="children border rounded-md ring-1 ring-black ring-opacity-5"
-    x-show="open"
-    x-transition:enter="transition ease-out duration-200"
-    x-transition:enter-start="transform opacity-0 scale-95"
-    x-transition:enter-end="transform opacity-100 scale-100"
-    x-transition:leave="transition ease-in duration-75"
-    x-transition:leave-start="transform opacity-100 scale-100"
-    x-transition:leave-end="transform opacity-0 scale-95"
-    x-cloak>
-        {{ $children }}
+    <div class="children absolute z-50 mt-1 rounded-md shadow-lg bg-white dark:bg-gray-700"
+        x-show="open"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="transform opacity-0 scale-95"
+        x-transition:enter-end="transform opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75"
+        x-transition:leave-start="transform opacity-100 scale-100"
+        x-transition:leave-end="transform opacity-0 scale-95"
+        x-cloak>
+        <div class="rounded-md ring-1 ring-black ring-opacity-5 bg-white dark:bg-gray-700">
+            {{ $children }}
+        </div>
     </div>
 </div>
