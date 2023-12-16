@@ -80,7 +80,7 @@ class CategoryController extends Controller
         $hash = $this->hashId;
         $id = $hash->decode($id);
         return view('pages.admin.category.edit', [
-            'categories' => Category::FindOrFail($id),
+            'category' => Category::FindOrFail($id),
             'hash' => $hash
         ]);
     }
