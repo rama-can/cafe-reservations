@@ -1,5 +1,6 @@
 import "./bootstrap";
-document.addEventListener("DOMContentLoaded", () => {
+
+document.addEventListener("alpine:init", () => {
     const notification = document.querySelector("div.notify");
 
     if (notification) {

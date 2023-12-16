@@ -86,18 +86,13 @@
                                                                 {{ $data->curenccy_rupiah }}
                                                             </div>
                                                         </td>
-                                                        {{-- <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                                            <div>
-                                                                <h4 class="text-gray-700 dark:text-gray-200">Content curating app</h4>
-                                                                <p class="text-gray-500 dark:text-gray-400">Brings all your news into one place</p>
-                                                            </div>
-                                                        </td> --}}
                                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                                            <p class="text-indigo-500 dark:text-indigo-400">
-                                                                @foreach ($categories as $category)
-                                                                <a href="{{ route('admin.categories.edit', $hashId->encode($category->id)) }}">
+                                                            <p class="">
+                                                                @foreach ($data->categories as $category)
+                                                                <a href="{{ route('admin.categories.edit', $hashId->encode($category->id)) }}" class="text-indigo-500 dark:text-indigo-400">
                                                                     {{ $category->name }}
-                                                                </a>@if (!$loop->last)|@endif
+                                                                </a>
+                                                                @if (!$loop->last)<span class="text-slate-400 dark:text-slate-600 font-semibold">|</span>@endif
                                                                 @endforeach
                                                             </p>
                                                         </td>
@@ -130,14 +125,13 @@
                                                 </tbody>
                                             </table>
                                             <x-modal name="confirm-food-deletion" :show="$errors->foodDeletion->isNotEmpty()" focusable :maxWidth="'lg'">
-                                                <form :action="'{{ route('admin.categories.destroy', '') }}' + '/' + foodId" class="p-6" method="POST">
+                                                <form :action="'{{ route('admin.foods.destroy', '') }}' + '/' + foodId" class="p-6" method="POST">
                                                     @csrf
                                                     @method('DELETE')
 
                                                     <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                                                         {{ __('Are you sure you want to delete this food?') }}
                                                     </h2>
-                                                    {{-- <h2 class="text-lg font-semibold mb-4">Modal Content for ID: <span x-text="categoryId"></span></h2> --}}
                                                     <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
                                                         {{ __('All of its resources and data will be permanently deleted. Please to confirm you would like to permanently delete your category.') }}
                                                     </p>
@@ -158,7 +152,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="mt-6 sm:flex sm:items-center sm:justify-end">
                             <div class="flex items-center mt-4 gap-x-4 sm:mt-0">
                                 {{ $foods->links() }}

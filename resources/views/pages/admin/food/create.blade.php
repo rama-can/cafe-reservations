@@ -1,8 +1,4 @@
 <x-admin-layout>@section('title'){{ __('Add food') }}@endsection
-    @push('styles')
-        <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
-        <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet" />
-    @endpush
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Category') }}
@@ -54,16 +50,27 @@
                                     <x-input-error class="mt-2" :messages="$errors->get('name')" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">
-                                    <x-input-label for="is_available" :value="__('Category')" />
-                                    <select multiple id="categories" name="categories[]"
-                                        class="mt-1.5 w-full h-10 text-sm border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
-                                    >
-                                    @if (count($categories) > 0)
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    @endif
-                                    </select>
+                                    <x-input-label for="name" :value="__('Description')" />
+                                    <textarea name="description" id="description" cols="30" rows="2" class="mt-1 block w-full px-2 py-2 text-sm border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="description"></textarea>
+                                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                                </div>
+                                <div class="col-span-6 sm:col-span-6">
+                                    <x-input-label for="format_price" value="{{ __('Price') }}" />
+                                    <div x-data="{ amount: '' }">
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                                <span class="text-sm text-slate-500 font-medium">Rp</span>
+                                            </div>
+                                            <x-text-input type="text" class="pl-8 mt-1 block w-full" :value="old('price')" required x-model="amount" x-on:input="amount = formatRupiah(amount)" placeholder="10.000"/>
+                                        </div>
+                                        <input type="text" id="price" name="price" x-bind:value="unformatRupiah(amount)" hidden>
+                                    </div>
+                                    <x-input-error :messages="$errors->get('price')" class="mt-1" />
+                                </div>
+                                <div class="col-span-6 sm:col-span-6">
+                                    <x-input-label for="name" :value="__('Categories')" />
+                                    <x-multi-select name="categories" id="categories" :options="$categories" :placeholder="'select category'" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('categories')" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="is_available" :value="__('Status')" />
@@ -94,13 +101,23 @@
         </div>
     </div>
     @push('scripts')
-        <script>
-            new SlimSelect({
-                select: '#categories',
-                settings: {
-                    allowDeselect: true
-                },
-            })
-        </script>
+    <script>
+        function formatRupiah(angka) {
+            if (!angka) return ''; // Mengembalikan nilai kosong jika input kosong
+
+            // Menghilangkan karakter selain angka dan hanya mengambil digit
+            var numberString = angka.replace(/[^\d]/g, '');
+
+            // Mengonversi string angka ke dalam format Rupiah
+            var formatted = new Intl.NumberFormat('id-ID').format(numberString);
+
+            return formatted;
+        }
+
+        function unformatRupiah(formatted) {
+            // Mengembalikan hanya nilai angka dari format Rupiah
+            return formatted.replace(/[^\d]/g, '');
+        }
+    </script>
     @endpush
 </x-admin-layout>

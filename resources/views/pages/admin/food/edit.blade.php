@@ -1,8 +1,4 @@
-<x-admin-layout>@section('title'){{ __('Add Category') }}@endsection
-    @push('styles')
-        <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
-        <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet" />
-    @endpush
+<x-admin-layout>@section('title'){{ __('Edit Food') }}@endsection
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Category') }}
@@ -13,7 +9,7 @@
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl items-center mx-auto">
                     <section>
-                    <x-form-section action="{{ route('admin.categories.update', $hash->encode($food->id)) }}" enctype="multipart/form-data">
+                    <x-form-section action="{{ route('admin.foods.update', $hash->encode($food->id)) }}" enctype="multipart/form-data">
                             <x-slot name="title">
                                 {{ __('food') }}
                             </x-slot>
@@ -54,18 +50,26 @@
                                     <x-input-error class="mt-2" :messages="$errors->get('name')" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">
-                                    <x-input-label for="is_available" :value="__('Category')" />
-                                    <select multiple id="categories" name="categories[]"
-                                        class="mt-1.5 w-full h-10 text-sm border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
-                                    >
-                                        @if (count($categories) > 0)
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" {{ in_array($category->id, $food->categories->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                                    {{ $category->name }}
-                                                </option>
-                                            @endforeach
-                                        @endif
-                                    </select>
+                                    <x-input-label for="description" :value="__('Description')" />
+                                    <textarea name="description" id="description" cols="30" rows="2" class="mt-1 block w-full px-2 py-2 text-sm border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ old('description', $food->description) }}</textarea>
+                                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                                </div>
+                                <div class="col-span-6 sm:col-span-6">
+                                    <x-input-label for="price" value="{{ __('Price') }}" />
+                                    <div x-data="{ amount: '{{ number_format($food->price, 0, ',', '.') }}' }">
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                                <span class="text-sm text-slate-800 dark:text-slate-400 font-medium">Rp</span>
+                                            </div>
+                                            <x-text-input type="text" class="pl-8 mt-1 block w-full" :value="old('name')" required x-model="amount" x-on:input="amount = formatRupiah(amount)" placeholder="name"/>
+                                        </div>
+                                        <input type="text" id="price" name="price" x-bind:value="unformatRupiah(amount)" hidden>
+                                    </div>
+                                    <x-input-error :messages="$errors->get('price')" class="mt-1" />
+                                </div>
+                                <div class="col-span-6 sm:col-span-6">
+                                    <x-input-label for="categories" :value="__('Category')" />
+                                    <x-multi-select name="categories" id="categories" :options="$categories" :selectedValue="$food->categories->pluck('id')->toArray()" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="is_available" :value="__('Status')" />
@@ -96,13 +100,17 @@
         </div>
     </div>
     @push('scripts')
-        <script>
-            new SlimSelect({
-                select: '#categories',
-                settings: {
-                    allowDeselect: true
-                },
-            })
-        </script>
+    <script>
+        function formatRupiah(angka) {
+            if (!angka) return '';
+            var numberString = angka.replace(/[^\d]/g, '');
+            var formatted = new Intl.NumberFormat('id-ID').format(numberString);
+            return formatted;
+        }
+
+        function unformatRupiah(formatted) {
+            return formatted.replace(/[^\d]/g, '');
+        }
+    </script>
     @endpush
 </x-admin-layout>
