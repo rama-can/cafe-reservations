@@ -30,7 +30,7 @@
 }
 
 .children a:hover {
-    color: #818cf8;
+    color: #fff;
 }
 
 @media (min-width: 768px) {

@@ -26,17 +26,17 @@
                         <x-slot name="name">{{ __('Settings') }}</x-slot>
                         <x-slot name="children">
                             <x-dropdown-link :href="route('admin.settings.site')" :active="request()->routeIs('admin.settings.site')">
-                                <span class="{{ request()->routeIs('admin.settings.site') ? 'text-indigo-600' : '' }}">
+                                <span class="{{ request()->routeIs('admin.settings.site') ? 'text-gray-900 dark:text-gray-50' : '' }}">
                                     {{ __('Site') }}
                                 </span>
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('admin.settings.banner')" :active="request()->routeIs('admin.settings.banner')">
-                                <span class="{{ request()->routeIs('admin.settings.banner') ? 'text-indigo-600' : '' }}">
+                                <span class="{{ request()->routeIs('admin.settings.banner') ? 'text-gray-900 dark:text-gray-50' : '' }}">
                                     {{ __('Banner') }}
                                 </span>
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('admin.settings.about')" :active="request()->routeIs('admin.settings.about')">
-                                <span class="{{ request()->routeIs('admin.settings.about') ? 'text-indigo-600' : '' }}">
+                                <span class="{{ request()->routeIs('admin.settings.about') ? 'text-gray-900 dark:text-gray-50' : '' }}">
                                     {{ __('About') }}
                                 </span>
                             </x-dropdown-link>
