@@ -69,7 +69,14 @@
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="name" :value="__('Categories')" />
-                                    <x-multi-select name="categories" id="categories" :options="$categories" :placeholder="'select category'" />
+                                    <div class="relative flex w-full mt-1">
+                                        <x-multi-select
+                                            name="categories[]"
+                                            id="categories"
+                                            :options="$categories"
+                                            :selectedValue="[]"
+                                            placeholder="selected categories" />
+                                    </div>
                                     <x-input-error class="mt-2" :messages="$errors->get('categories')" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">

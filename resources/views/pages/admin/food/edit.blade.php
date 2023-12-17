@@ -1,4 +1,6 @@
 <x-admin-layout>@section('title'){{ __('Edit Food') }}@endsection
+    @push('styles')
+    @endpush
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Category') }}
@@ -68,10 +70,19 @@
                                     <x-input-error :messages="$errors->get('price')" class="mt-1" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">
-                                    <x-input-label for="categories" :value="__('Category')" />
-                                    <x-multi-select name="categories" id="categories" :options="$categories" :selectedValue="$food->categories->pluck('id')->toArray()" />
+                                    <x-input-label for="select-categories" :value="__('Categories')" />
+                                    <div class="relative flex w-full mt-1">
+                                        <x-multi-select
+                                            name="categories[]"
+                                            id="categories"
+                                            :options="$categories"
+                                            :selectedValue="$food->categories->pluck('id')->toArray()"
+                                            placeholder="Selected categories" />
+                                      </div>
+                                    </div>
+                                    <x-input-error class="mt-2" :messages="$errors->get('categories')" />
                                 </div>
-                                <div class="col-span-6 sm:col-span-6">
+                                <div class="col-span-6 sm:col-span-6 mt-4">
                                     <x-input-label for="is_available" :value="__('Status')" />
                                     <div x-data="{ selectedOption: {{ $food->is_available ?? 'null' }} }">
                                         <select
