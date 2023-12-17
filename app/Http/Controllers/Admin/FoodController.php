@@ -140,6 +140,7 @@ class FoodController extends Controller
     {
         $hashId = $this->hashId->decode($id);
         $food = Food::FindOrFail($hashId);
+        $food->categories()->detach();
         if (Storage::disk('public')->exists($food->image)) {
             Storage::disk('public')->delete($food->image);
         }
