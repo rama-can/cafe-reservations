@@ -6,9 +6,10 @@ Route::middleware('auth', 'verified')
     ->name('admin.')
     ->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('pages.admin.dashboard');
-    })->name('dashboard');
+    /**
+     * Dashboard
+     */
+    Route::get('/dashboard', 'Admin\DashboardController')->name('dashboard');
 
     /**
      * Settings
