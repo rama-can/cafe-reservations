@@ -1,4 +1,5 @@
 import "./bootstrap";
+import flatpickr from "flatpickr";
 
 document.addEventListener("alpine:init", () => {
     const notification = document.querySelector("div.notify");

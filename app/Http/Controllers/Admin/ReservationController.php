@@ -63,11 +63,8 @@ class ReservationController extends Controller
     {
         $hash = $this->hashId;
         $id = $hash->decode($id);
-        $date = Reservation::findOrFail($id)->reservation_date;
-        $dateFormat = date('Y-m-d', strtotime($date));
         return view('pages.admin.reservation.edit', [
             'reservation' => Reservation::findOrFail($id),
-            'dateFormat' => $dateFormat,
             'hash' => $hash
         ]);
     }

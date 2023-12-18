@@ -158,7 +158,8 @@
 .ts-dropdown,
 .ts-control,
 .ts-control input {
-    color: #303030;
+    @apply text-slate-700 dark:text-slate-300;
+    /* color: #303030; */
     font-family: inherit;
     font-size: 13px;
     line-height: 18px;
@@ -168,8 +169,11 @@
 .ts-control,
 .ts-wrapper.single.input-active .ts-control {
     @apply bg-slate-100 dark:bg-slate-900;
-    /* background: #fff;
-    cursor: text; */
+    /* background: #fff; */
+    cursor: text;
+}
+.ts-wrapper.single.full.has-items.input-hidden .ts-control {
+    @apply bg-slate-100 dark:bg-slate-900;
 }
 
 .ts-control {
@@ -328,7 +332,7 @@
 .ts-dropdown .create:hover,
 .ts-dropdown .option:hover,
 .ts-dropdown .active {
-    @apply bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100 hover:bg-indigo-600 hover:opacity-70 hover:text-slate-50 dark:hover:bg-indigo-600 dark:hover:opacity-60 dark:hover:text-slate-50 rounded-md;
+    @apply bg-slate-100 text-slate-900 dark:bg-indigo-900 dark:text-slate-100 hover:bg-indigo-600 hover:opacity-70 hover:text-slate-50 dark:hover:bg-indigo-600 dark:hover:opacity-60 dark:hover:text-white rounded-md;
     /* background-color: #f5fafd;
     color: #495c68; */
 }
