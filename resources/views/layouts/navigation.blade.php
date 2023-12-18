@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.reservations.index')" :active="request()->routeIs('admin.reservations.index') || request()->routeIs('admin.reservations.create') || request()->routeIs('admin.reservations.edit')">
+                        {{ __('Reservation') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.foods.index')" :active="request()->routeIs('admin.foods.index') || request()->routeIs('admin.foods.create') || request()->routeIs('admin.foods.edit')">
                         {{ __('Food Menu') }}
                     </x-nav-link>
