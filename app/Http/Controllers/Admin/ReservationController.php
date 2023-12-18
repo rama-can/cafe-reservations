@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Services\HashIdService;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,7 @@ class ReservationController extends Controller
     public function index()
     {
         return view('pages.admin.reservation.index', [
-            'reservations' => \App\Models\Reservation::with('category')->paginate(5),
+            'reservations' => Reservation::with('category')->paginate(5),
             'hashId' => $this->hashId
         ]);
     }
@@ -60,7 +61,15 @@ class ReservationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $hash = $this->hashId;
+        $id = $hash->decode($id);
+        $date = Reservation::findOrFail($id)->reservation_date;
+        $dateFormat = date('Y-m-d', strtotime($date));
+        return view('pages.admin.reservation.edit', [
+            'reservation' => Reservation::findOrFail($id),
+            'dateFormat' => $dateFormat,
+            'hash' => $hash
+        ]);
     }
 
     /**
