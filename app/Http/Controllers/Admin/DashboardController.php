@@ -12,6 +12,10 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('pages.admin.dashboard');
+        return view('pages.admin.dashboard', [
+            'food' => \App\Models\Food::count(),
+            'category' => \App\Models\Category::count(),
+            'user' => \App\Models\User::count(),
+        ]);
     }
 }
