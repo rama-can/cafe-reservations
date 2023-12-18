@@ -85,7 +85,7 @@
                                                             <a href="{{ route('admin.categories.edit', $hashId->encode($data->id)) }}" class="inline-block">
                                                                 <x-secondary-button class="h-8 w-8 p-1 flex items-center justify-center mr-2">
                                                                     <span>
-                                                                        <x-tabler-pencil-plus class="text-gray-800 dark:text-gray-400 h-6 w-6" />
+                                                                        <x-tabler-pencil-plus class="text-gray-600 dark:text-gray-400 h-6 w-6" />
                                                                     </span>
                                                                 </x-secondary-button>
                                                             </a>
@@ -94,7 +94,7 @@
                                                                 @click="categoryId = '{{ $hashId->encode($data->id) }}';"
                                                             >
                                                                 <span>
-                                                                    <x-tabler-trash class="text-gray-800 dark:text-gray-200 h-6 w-6" />
+                                                                    <x-tabler-trash class="text-gray-100 dark:text-gray-200 h-6 w-6" />
                                                                 </span>
                                                             </x-danger-button>
                                                         </td>
