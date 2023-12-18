@@ -20,7 +20,7 @@ return new class extends Migration
             $table->dateTime('reservation_date');
             $table->integer('quantity');
             $table->text('message')->nullable();
-            $table->enum('status', ['confirmed', 'pending', 'rehected'])->default('pending');
+            $table->enum('status', ['approved', 'pending', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

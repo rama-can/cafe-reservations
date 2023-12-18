@@ -20,11 +20,13 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
+        \App\Models\User::factory(9)->create();
         $this->call([
             SettingSeeder::class,
             CategorySeeder::class,
             FoodSeeder::class,
             FoodCategorySeeder::class,
         ]);
+        \App\Models\Reservation::factory(10)->create();
     }
 }
