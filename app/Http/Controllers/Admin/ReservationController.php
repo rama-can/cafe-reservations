@@ -33,7 +33,6 @@ class ReservationController extends Controller
         if ($search) {
             $query->where('name', 'LIKE', '%' . $search . '%')
                 ->orWhere('email', 'LIKE', '%' . $search . '%');
-                // Tambahkan kolom-kolom lain yang ingin Anda cari di sini
         }
 
         $reservations = $query->paginate(5);
@@ -89,7 +88,22 @@ class ReservationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $hashId = $this->hashId->decode($id);
+        $reservation = Reservation::FindOrFail($hashId);
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone_number' => 'required|string|max:255',
+            'reservation_date' => 'required|date',
+            'reservation_time' => 'required|string|max:255',
+            'quantity' => 'required|integer',
+            'message' => 'nullable|string',
+            'status' => 'required|in:pending,approved,rejected'
+        ]);
+
+        $reservation->update($data);
+        notify()->success('Reservation updated successfully!');
+        return redirect()->route('admin.reservations.index');
     }
 
     /**
