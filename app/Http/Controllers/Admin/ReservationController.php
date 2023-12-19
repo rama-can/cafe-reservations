@@ -6,6 +6,11 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Services\HashIdService;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReservationApprovedMail;
+use App\Mail\ReservationRejectedMail;
+use App\Notifications\ReservationApproved;
+use App\Notifications\ReservationRejected;
 
 class ReservationController extends Controller
 {
@@ -100,6 +105,21 @@ class ReservationController extends Controller
             'message' => 'nullable|string',
             'status' => 'required|in:pending,approved,rejected'
         ]);
+
+        $oldStatus = $reservation->status;
+
+        $reservation->update($data);
+
+        // if ($reservation->status === 'approved' && $oldStatus !== 'approved') {
+        //     Mail::to($reservation->email)->send(new ReservationApprovedMail($reservation));
+        // } elseif ($reservation->status === 'rejected' && $oldStatus !== 'rejected') {
+        //     Mail::to($reservation->email)->send(new ReservationRejectedMail($reservation));
+        // }
+        if ($reservation->status === 'approved' && $oldStatus !== 'approved') {
+            $reservation->notify(new ReservationApproved($reservation));
+        } elseif ($reservation->status === 'rejected' && $oldStatus !== 'rejected') {
+            $reservation->notify(new ReservationRejected($reservation));
+        }
 
         $reservation->update($data);
         notify()->success('Reservation updated successfully!');
