@@ -24,13 +24,28 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
+        $query = Reservation::with('category');
+
+        if ($search) {
+            $query->where('name', 'LIKE', '%' . $search . '%')
+                ->orWhere('email', 'LIKE', '%' . $search . '%');
+                // Tambahkan kolom-kolom lain yang ingin Anda cari di sini
+        }
+
+        $reservations = $query->paginate(5);
+
         return view('pages.admin.reservation.index', [
-            'reservations' => Reservation::with('category')->paginate(5),
-            'hashId' => $this->hashId
+            'reservations' => $reservations,
+            'hashId' => $this->hashId,
+            'search' => $search,
+            'isSearching' => $search ? true : false,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

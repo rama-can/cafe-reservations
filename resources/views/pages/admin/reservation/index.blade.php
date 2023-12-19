@@ -16,12 +16,26 @@
                                     <h2 class="text-lg font-medium text-gray-800 dark:text-white">All Reservations</h2>
                                 </div>
                             </div>
-
+                            <div class="flex items-center justify-center">
+                                <form action="{{ route('admin.reservations.index') }}" method="GET">
+                                    <div class="relative">
+                                        <x-text-input type="text" name="search" placeholder="Search..." value="{{ $search }}" class="mt-1 block w-full" autocomplete="name" placeholder="Search.." />
+                                        <span class="absolute inset-y-0 right-0 flex items-center">
+                                            <button type="submit" class="p-2 focus:outline-none focus:shadow-outline">
+                                                <x-tabler-search class=""/>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    @if ($isSearching)
+                                        <a href="{{ route('admin.reservations.index') }}" class="ml-2 text-sm text-gray-600 dark:text-gray-400 mb-4">Clear Search</a>
+                                    @endif
+                                </form>
+                            </div>
                             <div class="flex items-center mt-4 gap-x-3">
                                 <a href="{{ route('admin.foods.create') }}">
                                     <x-primary-button>
-                                        <x-tabler-plus class="w-5 h-5 mr-1" />
-                                        <span>Add Food</span>
+                                        <x-tabler-file-export class="w-5 h-5 mr-1" />
+                                        <span>Export</span>
                                     </x-primary-button>
                                 </a>
                             </div>
@@ -29,36 +43,36 @@
                         <div class="flex flex-col mt-6">
                             <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
                                 <div class="flex items-center justify-center min-w-full py-2 align-middle md:px-6 lg:px-8">
-                                    <div class="overflow-x-auto border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                                    <div class="overflow-x-auto border-2 border-gray-200 dark:border-gray-700 md:rounded-lg">
                                         <div x-data="{ foodId: null }">
                                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 table-auto">
                                                 <thead class="bg-gray-50 dark:bg-gray-800">
                                                     <tr>
-                                                        <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                                                             Id
                                                         </th>
 
-                                                        <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                                                             Name
                                                         </th>
 
-                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                                                             Email
                                                         </th>
 
-                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                                                             Phone
                                                         </th>
 
-                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                                                             Quantity
                                                         </th>
 
-                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                            Reservation Date
+                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
+                                                            Date & Time
                                                         </th>
 
-                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-600 dark:text-gray-400">
                                                             Status
                                                         </th>
 
@@ -68,36 +82,41 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                                    @if ($reservations->isEmpty())
+                                                        <tr>
+                                                            <td colspan="8" class="text-center py-4 text-gray-700 dark:text-white">No reservations found.</td>
+                                                        </tr>
+                                                    @else
                                                     @foreach ($reservations as $data)
                                                     <tr>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                            <div class="text-gray-800 dark:text-white">
+                                                            <div class="text-gray-700 dark:text-white">
                                                                 {{ $data->id }}
                                                             </div>
                                                         </td>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                            <div class="text-gray-800 dark:text-white">
+                                                            <div class="text-gray-700 dark:text-white">
                                                                 {{ $data->name }}
                                                             </div>
                                                         </td>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                            <div class="text-gray-800 dark:text-white">
+                                                            <div class="text-gray-700 dark:text-white">
                                                                 {{ $data->email }}
                                                             </div>
                                                         </td>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                            <div class="text-gray-800 dark:text-white">
+                                                            <div class="text-gray-700 dark:text-white">
                                                                 {{ $data->phone_number }}
                                                             </div>
                                                         </td>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                            <div class="text-gray-800 dark:text-white">
+                                                            <div class="text-gray-700 dark:text-white">
                                                                 {{ $data->quantity }}
                                                             </div>
                                                         </td>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                            <div class="text-gray-800 dark:text-white">
-                                                                {{ $data->reservation_date }}
+                                                            <div class="text-gray-700 dark:text-white">
+                                                                {{ $data->reservation_date->format('d-m-Y') }} | {{ date('H:i', $data->reservation_time) }}
                                                             </div>
                                                         </td>
                                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
@@ -105,7 +124,7 @@
                                                             @if($data->status === 'approved')
                                                                 <span class="{{ $spanClass }} text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">Approved</span>
                                                             @elseif($data->status === 'pending')
-                                                                <span class="{{ $spanClass }} text-yellow-500 bg-yellow-100/100 dark:bg-gray-800">Pending</span>
+                                                                <span class="{{ $spanClass }} text-yellow-600 bg-yellow-100/100 dark:bg-gray-800">Pending</span>
                                                             @elseif($data->status === 'rejected')
                                                                 <span class="{{ $spanClass }} text-red-500 bg-red-100/60 dark:bg-gray-800">Rejected</span>
                                                             @endif
@@ -115,7 +134,7 @@
                                                             <a href="{{ route('admin.reservations.edit', $hashId->encode($data->id)) }}" class="inline-block">
                                                                 <x-secondary-button class="h-8 w-8 p-1 flex items-center justify-center mr-2">
                                                                     <span>
-                                                                        <x-tabler-pencil-plus class="text-gray-600 dark:text-gray-400 h-6 w-6" />
+                                                                        <x-tabler-pencil-plus class="text-gray-700 dark:text-gray-400 h-6 w-6" />
                                                                     </span>
                                                                 </x-secondary-button>
                                                             </a>
@@ -130,6 +149,7 @@
                                                         </td>
                                                     </tr>
                                                     @endforeach
+                                                    @endif
                                                 </tbody>
                                             </table>
                                             <x-modal name="confirm-food-deletion" :show="$errors->foodDeletion->isNotEmpty()" focusable :maxWidth="'lg'">
