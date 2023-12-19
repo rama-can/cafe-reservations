@@ -116,7 +116,7 @@
                                                         </td>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                             <div class="text-gray-700 dark:text-white">
-                                                                {{ $data->reservation_date->format('d-m-Y') }} | {{ date('H:i', $data->reservation_time) }}
+                                                                {{ \Carbon\Carbon::parse($data->date)->format('d-m-Y') }} | {{ date('H:i', strtotime($data->time)) }}
                                                             </div>
                                                         </td>
                                                         <td class="px-4 py-4 text-sm whitespace-nowrap">

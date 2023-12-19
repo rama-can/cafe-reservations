@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone_number');
-            $table->date('reservation_date');
-            $table->time('reservation_time');
+            $table->date('date');
+            $table->time('time');
             $table->integer('quantity');
             $table->text('message')->nullable();
             $table->enum('status', ['approved', 'pending', 'rejected'])->default('pending');

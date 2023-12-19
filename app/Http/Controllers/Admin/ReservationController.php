@@ -94,8 +94,8 @@ class ReservationController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'phone_number' => 'required|string|max:255',
-            'reservation_date' => 'required|date',
-            'reservation_time' => 'required|string|max:255',
+            'date' => 'required|date',
+            'time' => 'required|string|max:255',
             'quantity' => 'required|integer',
             'message' => 'nullable|string',
             'status' => 'required|in:pending,approved,rejected'

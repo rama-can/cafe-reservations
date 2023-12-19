@@ -15,8 +15,7 @@ class Reservation extends Model
     ];
 
     protected $casts = [
-        'reservation_date' => 'datetime',
-        'reservation_time' => 'timestamp'
+        'date' => 'datetime',
     ];
 
     public function category(): BelongsTo

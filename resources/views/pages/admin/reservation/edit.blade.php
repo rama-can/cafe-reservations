@@ -42,14 +42,14 @@
                                     <x-input-error class="mt-2" :messages="$errors->get('quantity')" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <x-input-label for="reservation_date" :value="__('Reservation Date')" />
-                                    <x-text-icon-input id="reservation_date" type="text" class="dateReservation mt-1 block w-full" name="reservation_date" :value="old('reservation_date', $reservation->reservation_date->format('d-m-Y'))" placeholder="phone number" icon="calendar-event" />
-                                    <x-input-error class="mt-2" :messages="$errors->get('reservation_date')" />
+                                    <x-input-label for="date" :value="__('Reservation Date')" />
+                                    <x-text-icon-input id="date" type="text" class="dateReservation mt-1 block w-full" name="date" :value="old('date', $reservation->date->format('d-m-Y'))" placeholder="phone number" icon="calendar-event" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('date')" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <x-input-label for="reservation_time" :value="__('Reservation Time')" />
-                                    <x-text-icon-input id="reservation_time" type="text" class="timeReservation mt-1 block w-full" name="reservation_time" :value="old('reservation_time')" placeholder="reservation time" icon="calendar-event" />
-                                    <x-input-error class="mt-2" :messages="$errors->get('reservation_time')" />
+                                    <x-input-label for="time" :value="__('Reservation Time')" />
+                                    <x-text-icon-input id="time" type="text" class="timeReservation mt-1 block w-full" name="time" :value="old('time', $reservation->time)" placeholder="reservation time" icon="calendar-event" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('time')" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-6">
                                     <x-input-label for="description" :value="__('Description')" />
@@ -86,7 +86,7 @@
             });
             flatpickr('.timeReservation', {
                 dateFormat: 'H:i',
-                defaultDate: '{{ $reservation->reservation_time }}',
+                defaultDate: '{{ $reservation->time }}',
                 enableTime: true,
                 time_24hr: true,
                 noCalendar: true,
