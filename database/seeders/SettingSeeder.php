@@ -38,6 +38,10 @@ class SettingSeeder extends Seeder
                 'value' => 'example@gamil.com',
             ],
             [
+                'key' => 'phone',
+                'value' => '628787514066',
+            ],
+            [
                 'key' => 'copyright',
                 'value' => 'Rama Can & Fahmi Tri septiyadi',
             ],
