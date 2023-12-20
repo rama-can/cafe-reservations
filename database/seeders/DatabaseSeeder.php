@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             FoodSeeder::class,
             FoodCategorySeeder::class,
+            ChefSeeder::class,
         ]);
         \App\Models\Reservation::factory(6)->create();
     }
