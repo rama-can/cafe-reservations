@@ -102,14 +102,13 @@
                                                 </tbody>
                                             </table>
                                             <x-modal name="confirm-chef-deletion" :show="$errors->chefDeletion->isNotEmpty()" focusable :maxWidth="'lg'">
-                                                <form :action="'{{ route('admin.categories.destroy', '') }}' + '/' + chefId" class="p-6" method="POST">
+                                                <form :action="'{{ route('admin.chefs.destroy', '') }}' + '/' + chefId" class="p-6" method="POST">
                                                     @csrf
                                                     @method('DELETE')
 
                                                     <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                                                         {{ __('Are you sure you want to delete this chef?') }}
                                                     </h2>
-                                                    {{-- <h2 class="text-lg font-semibold mb-4">Modal Content for ID: <span x-text="categoryId"></span></h2> --}}
                                                     <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
                                                         {{ __('All of its resources and data will be permanently deleted. Please to confirm you would like to permanently delete your category.') }}
                                                     </p>

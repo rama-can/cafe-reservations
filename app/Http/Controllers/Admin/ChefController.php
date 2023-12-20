@@ -136,10 +136,20 @@ class ChefController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy a chef by their ID.
+     *
+     * @param string $id The ID of the chef to be destroyed.
+     * @return void
      */
     public function destroy(string $id)
     {
-        //
+        $hashId = $this->hashId->decode($id);
+        $chef = Chef::findOrFail($hashId);
+        if (Storage::disk('public')->exists($chef->image)) {
+            Storage::disk('public')->delete($chef->image);
+        }
+        $chef->delete();
+        notify()->success('Chef deleted successfully!');
+        return redirect()->route('admin.chefs.index');
     }
 }
