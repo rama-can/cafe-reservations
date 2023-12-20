@@ -19,6 +19,11 @@
         <link rel="stylesheet" href="{{ asset('assets/css/owl-carousel.css') }}">
 
         <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+        @livewireStyles
     </head>
 
     <body>
@@ -83,5 +88,22 @@
         });
 
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        flatpickr('.dateReservation', {
+            dateFormat: 'd-m-Y',
+            defaultDate: [new Date()],
+            enableTime: false,
+        });
+        flatpickr('.timeReservation', {
+            dateFormat: 'H:i',
+            defaultDate: [new Date()],
+            enableTime: true,
+            time_24hr: true,
+            noCalendar: true,
+        });
+    });
+    </script>
+    @livewireScripts
     </body>
 </html>

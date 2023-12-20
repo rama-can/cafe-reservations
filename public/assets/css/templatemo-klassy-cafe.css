@@ -1409,7 +1409,7 @@ reservation
 .contact-form input:focus,
 .contact-form textarea:focus,
 .contact-form select:focus {
-    border-color: #fb5849;
+    border-color: #3b566e;
 }
 
 .contact-form button {
