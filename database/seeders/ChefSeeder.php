@@ -15,7 +15,7 @@ class ChefSeeder extends Seeder
         $data = [
             [
                 'name' => 'Randy Walker',
-                'image' => 'images/chefs-1.jpg',
+                'image' => 'images/chefs-01.jpg',
                 'task' => 'Pastry Chef',
                 'facebook' => 'example',
                 'twitter' => 'example',
@@ -23,7 +23,7 @@ class ChefSeeder extends Seeder
             ],
             [
                 'name' => 'David Martin',
-                'image' => 'images/chefs-2.jpg',
+                'image' => 'images/chefs-02.jpg',
                 'task' => 'Cookie Chef',
                 'facebook' => 'example',
                 'twitter' => 'example',
@@ -31,7 +31,7 @@ class ChefSeeder extends Seeder
             ],
             [
                 'name' => 'Peter Perkson',
-                'image' => 'images/chefs-3.jpg',
+                'image' => 'images/chefs-03.jpg',
                 'task' => 'Pancake Chef',
                 'facebook' => 'example',
                 'twitter' => 'example',
