@@ -55,7 +55,7 @@ class CategoryController extends Controller
             $file = $request->file('image');
             $fileName = 'thumbnail_categories_'. Date('d_m_Y_His') .'.' . $file->getClientOriginalExtension();
             $filePath = 'images/food/' . $fileName;
-            Storage::disk('public')->put($filePath, file_get_contents($file));;
+            Storage::disk('public')->put($filePath, file_get_contents($file));
             $vaildated['image'] = $filePath;
         }
 
