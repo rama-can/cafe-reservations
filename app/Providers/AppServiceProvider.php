@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
-            $getTheme = Cache::remember('settings', now()->addHours(24), function () {
+            $getTheme = Cache::remember('settings_data', now()->addHours(24), function () {
                 return \App\Models\Setting::all()->pluck('value', 'key')->toArray();
             });
 
