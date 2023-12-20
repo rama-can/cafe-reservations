@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Chef;
 use Illuminate\Http\Request;
 use App\Services\HashIdService;
 use App\Http\Controllers\Controller;
-use App\Models\Chef;
+use Illuminate\Support\Facades\Storage;
 
 class ChefController extends Controller
 {
@@ -30,7 +31,7 @@ class ChefController extends Controller
     public function index()
     {
         return view('pages.admin.chef.index', [
-            'chefs' => Chef::take(3)->get(),
+            'chefs' => Chef::take(4)->get(),
             'hashId' => $this->hashId
         ]);
     }
@@ -40,7 +41,7 @@ class ChefController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.chef.create');
     }
 
     /**
@@ -48,7 +49,26 @@ class ChefController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'task' => 'required|string|min:3|max:255',
+            'facebook' => 'nullable|string|min:3|max:255',
+            'twitter' => 'nullable|string|min:3|max:255',
+            'instagram' => 'nullable|string|min:3|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $fileName = 'thumbnail_chef_'. Date('d_m_Y_His') .'.' . $file->getClientOriginalExtension();
+            $filePath = 'images/chef/' . $fileName;
+            Storage::disk('public')->put($filePath, file_get_contents($file));
+            $data['image'] = $filePath;
+        }
+
+        Chef::create($data);
+        notify()->success('Chef created successfully!');
+        return redirect()->route('admin.chefs.index');
     }
 
     /**
