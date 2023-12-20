@@ -1045,8 +1045,8 @@ menu
 }
 
 .card img {
-    width: 100%;
-    height: 100%;
+    width: 280px;
+    height: 280px;
     object-fit: cover;
 }
 
@@ -1529,9 +1529,11 @@ offers
 #offers .tabs-content img {
     float: left;
     width: 100px;
+    height: 100px;
     max-width: 100px;
     margin-right: 20px;
     border-radius: 5px;
+    object-fit: cover;
 }
 #offers .tabs-content h4 {
     padding-top: 10px;
@@ -1556,16 +1558,16 @@ offers
 
 #offers .tabs-content .price h6 {
     position: absolute;
-    top: 15px;
+    top: 0px;
     right: 0;
-    width: 70px;
-    height: 70px;
+    width: 140px;
+    height: 28px;
     background-color: #fb5849;
     display: inline-block;
     text-align: center;
-    line-height: 70px;
+    line-height: 30px;
     border-radius: 3px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #fff;
 }

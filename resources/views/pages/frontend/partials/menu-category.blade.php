@@ -41,7 +41,7 @@
                                                                 <h4>{{ $food->name }}</h4>
                                                                 <p>{{ $food->description }}</p>
                                                                 <div class="price">
-                                                                    <h6>$10.50</h6>
+                                                                    <h6>{{ $food->curenccy_rupiah }}</h6>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -65,7 +65,7 @@
                                                                 <h4>{{ $food->name }}</h4>
                                                                 <p>{{ $food->description }}</p>
                                                                 <div class="price">
-                                                                    <h6>$10.50</h6>
+                                                                    <h6>{{ $food->curenccy_rupiah }}</h6>
                                                                 </div>
                                                             </div>
                                                         </div>
