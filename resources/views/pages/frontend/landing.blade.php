@@ -1,6 +1,6 @@
 <x-frontend-layout>
     <!-- ***** Main Banner Area Start ***** -->
-    <x-frontend.banner />
+    @include('pages.frontend.partials.banner')
     <!-- ***** Main Banner Area End ***** -->
 
     <!-- ***** About Area Starts ***** -->
