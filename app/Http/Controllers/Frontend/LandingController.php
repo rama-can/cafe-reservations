@@ -15,7 +15,7 @@ class LandingController extends Controller
         $food = \App\Models\Food::get();
         $categories = \App\Models\Category::with(['foods' => function ($query) {
             $query->inRandomOrder();
-        }])->get();
+        }])->take(6)->get();
         $chefs = \App\Models\Chef::get();
         return view('pages.frontend.landing', compact('food', 'categories', 'chefs'));
     }
