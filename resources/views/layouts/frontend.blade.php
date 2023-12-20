@@ -3,9 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Klassy Cafe - Restaurant HTML Template</title>
+        <meta name="description" content="{{ $getTheme['site_description'] }}">
+        <meta name="author" content="Rama Can">
+        <title>{{ $getTheme['site_name'] }}</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url($getTheme['logo']) }}">
+
         <!-- Additional CSS Files -->
         @vite(['resources/css/frontend.css'])
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.css') }}">
