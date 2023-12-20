@@ -31,7 +31,7 @@
 
 
     <!-- ***** Header Area Start ***** -->
-    <x-frontend.header />
+    <x-frontend.layouts.header />
     <!-- ***** Header Area End ***** -->
 
     <main>
@@ -39,7 +39,7 @@
     </main>
 
     <!-- ***** Footer Start ***** -->
-    <x-frontend.footer />
+    <x-frontend.layouts.footer />
 
     <!-- jQuery -->
     <script src="{{ asset('assets/js/jquery-2.1.0.min.js') }}"></script>
