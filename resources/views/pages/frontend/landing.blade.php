@@ -25,7 +25,7 @@
                             <h6>Contact Us</h6>
                             <h2>Here You Can Make A Reservation Or Just walkin to our cafe</h2>
                         </div>
-                        <p>Donec pretium est orci, non vulputate arcu hendrerit a. Fusce a eleifend riqsie, namei sollicitudin urna diam, sed commodo purus porta ut.</p>
+                        <p>Get restaurant table reservations from our website.  makes it easier for you to book a table by pressing the "Reserve Table" button.</p>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="phone">
@@ -38,7 +38,7 @@
                                 <div class="message">
                                     <i class="fa fa-envelope"></i>
                                     <h4>Emails</h4>
-                                    <span><a href="#">hello@company.com</a><br><a href="#">info@company.com</a></span>
+                                    <span><a href="#">{{ $getTheme['email'] }}</a></span>
                                 </div>
                             </div>
                         </div>

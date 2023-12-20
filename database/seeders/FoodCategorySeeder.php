@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class FoodCategorySeeder extends Seeder
 {
@@ -12,20 +13,29 @@ class FoodCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        // Ambil beberapa makanan dan kategori (misalnya, 3 makanan dan 2 kategori)
-        // $foods = \App\Models\Food::inRandomOrder()->limit(3)->get();
-        // $categories = \App\Models\Category::inRandomOrder()->limit(3)->get();
-
-        // Melakukan pengaitan many-to-many antara makanan dan kategori
-        // foreach ($foods as $food) {
-        //     $food->categories()->attach($categories->pluck('id'));
-        // }
-
-        $foods = \App\Models\Food::all();
         $categories = \App\Models\Category::all();
 
+        $foods = \App\Models\Food::inRandomOrder()->take(6)->get(); // Mengambil 6 makanan secara acak
+
+        $interval = 5; // Durasi waktu antar entri (dalam detik)
+        $currentTime = Carbon::now();
+
         foreach ($categories as $category) {
-            $category->foods()->attach($foods->pluck('id'));
+            foreach ($foods as $food) {
+                $category->foods()->attach($food->id, [
+                    'created_at' => $currentTime,
+                    'updated_at' => $currentTime,
+                ]);
+
+                $currentTime = $currentTime->addSeconds($interval);
+            }
         }
+
+        // $foods = \App\Models\Food::all();
+        // $categories = \App\Models\Category::all();
+
+        // foreach ($categories as $category) {
+        //     $category->foods()->attach($foods->pluck('id'));
+        // }
     }
 }
