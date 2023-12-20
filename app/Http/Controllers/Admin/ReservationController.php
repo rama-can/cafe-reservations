@@ -6,9 +6,6 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Services\HashIdService;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ReservationApprovedMail;
-use App\Mail\ReservationRejectedMail;
 use App\Notifications\ReservationApproved;
 use App\Notifications\ReservationRejected;
 
@@ -17,7 +14,7 @@ class ReservationController extends Controller
     protected $hashId;
 
     /**
-     * CategoryController constructor.
+     * ReservationController constructor.
      *
      * @param HashIdService $hashIdService The HashIdService instance.
      */
@@ -89,7 +86,11 @@ class ReservationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update a reservation.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $id
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, string $id)
     {
@@ -110,11 +111,13 @@ class ReservationController extends Controller
 
         $reservation->update($data);
 
-        // if ($reservation->status === 'approved' && $oldStatus !== 'approved') {
-        //     Mail::to($reservation->email)->send(new ReservationApprovedMail($reservation));
-        // } elseif ($reservation->status === 'rejected' && $oldStatus !== 'rejected') {
-        //     Mail::to($reservation->email)->send(new ReservationRejectedMail($reservation));
-        // }
+        /**
+         * Notifies the user about the status change of a reservation.
+         *
+         * @param Reservation $reservation The reservation object.
+         * @param string $oldStatus The previous status of the reservation.
+         * @return void
+         */
         if ($reservation->status === 'approved' && $oldStatus !== 'approved') {
             $reservation->notify(new ReservationApproved($reservation));
         } elseif ($reservation->status === 'rejected' && $oldStatus !== 'rejected') {
