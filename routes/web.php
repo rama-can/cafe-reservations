@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\LandingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.frontend.landing');
-});
+Route::get('/', LandingController::class)->name('landing');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
