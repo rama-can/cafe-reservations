@@ -13,7 +13,7 @@ class LandingController extends Controller
     public function __invoke(Request $request)
     {
         $food = \App\Models\Food::get();
-        $categories = \App\Models\Category::get();
+        $categories = \App\Models\Category::with('foods')->get();
         $chefs = \App\Models\Chef::get();
         return view('pages.frontend.landing', compact('food', 'categories', 'chefs'));
     }

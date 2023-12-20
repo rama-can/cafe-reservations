@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->text('task');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('instagram');
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
             $table->timestamps();
         });
     }
