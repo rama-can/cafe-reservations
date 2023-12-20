@@ -2,17 +2,37 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\HashIdService;
+use App\Http\Controllers\Controller;
+use App\Models\Chef;
 
 class ChefController extends Controller
 {
+    protected $hashId;
+
     /**
-     * Display a listing of the resource.
+     * ChefController constructor.
+     *
+     * @param HashIdService $hashIdService The HashIdService instance.
+     */
+    public function __construct(HashIdService $hashIdService)
+    {
+        $this->hashId = $hashIdService;
+    }
+
+
+    /**
+     * Display the index page for the ChefController.
+     *
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        return view('pages.admin.chef.index', [
+            'chefs' => Chef::take(3)->get(),
+            'hashId' => $this->hashId
+        ]);
     }
 
     /**

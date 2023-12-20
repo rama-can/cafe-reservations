@@ -132,7 +132,7 @@ class ReservationController extends Controller
     /**
      * Delete a reservation.
      *
-     * @param string $id The ID of the reservation to be deleted.
+     * @param string $id The ID of the reservation to be deleteden.
      * @return void
      */
     public function destroy(string $id)
