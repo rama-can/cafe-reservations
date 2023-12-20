@@ -80,19 +80,59 @@ class ChefController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Edit a chef.
+     *
+     * @param string $id The ID of the chef to edit.
+     * @return \Illuminate\View\View The view for editing the chef.
      */
     public function edit(string $id)
     {
-        //
+        $hashId = $this->hashId->decode($id);
+        $chef = Chef::findOrFail($hashId);
+        return view('pages.admin.chef.edit', [
+            'chef' => $chef,
+            'hash' => $this->hashId
+        ]);
     }
 
+
     /**
-     * Update the specified resource in storage.
+     * Update a chef's information.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, string $id)
     {
-        //
+        $hashId = $this->hashId->decode($id);
+        $chef = Chef::findOrFail($hashId);
+
+        $data = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'task' => 'required|string|min:3|max:255',
+            'facebook' => 'nullable|string|min:3|max:255',
+            'twitter' => 'nullable|string|min:3|max:255',
+            'instagram' => 'nullable|string|min:3|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = 'thumbnail_chef_' . Date('d_m_Y_His') . '.' . $file->getClientOriginalExtension();
+            $filePath = 'images/chef/' . $fileName;
+            Storage::disk('public')->put($filePath, file_get_contents($file));
+            $data['image'] = $filePath;
+
+            // Delete the previous image file if it exists
+            if (Storage::disk('public')->exists($chef->image)) {
+                Storage::disk('public')->delete($chef->image);
+            }
+        }
+
+        $chef->update($data);
+        notify()->success('Chef updated successfully!');
+        return redirect()->route('admin.chefs.index');
     }
 
     /**

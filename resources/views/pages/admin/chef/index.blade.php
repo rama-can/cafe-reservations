@@ -81,7 +81,7 @@
                                                         </td>
 
                                                         <td class="px-4 py-4 text-xs font-semibold whitespace-nowrap flex items-center">
-                                                            <a href="{{ route('admin.categories.edit', $hashId->encode($data->id)) }}" class="inline-block">
+                                                            <a href="{{ route('admin.chefs.edit', $hashId->encode($data->id)) }}" class="inline-block">
                                                                 <x-secondary-button class="h-8 w-8 p-1 flex items-center justify-center mr-2">
                                                                     <span>
                                                                         <x-tabler-pencil-plus class="text-gray-600 dark:text-gray-400 h-6 w-6" />
