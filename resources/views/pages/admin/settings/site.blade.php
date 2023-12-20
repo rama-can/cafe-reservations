@@ -59,10 +59,15 @@
                                     <x-input-text-area class="mt-1 w-full" id="address" name="address" placeholder="address" cols="4" rows="3" :value="old('address', $data['address'])" />
                                     <x-input-error :messages="$errors->get('address')" class="mt-1" />
                                 </div>
-                                <div class="col-span-6 sm:col-span-6">
-                                    <x-input-label for="copyright" :value="__('Copyright')" />
-                                    <x-text-input id="copyright" name="copyright" type="text" class="mt-1 block w-full" :value="old('copyright', $data['copyright'])" required autofocus autocomplete="copyright" />
-                                    <x-input-error class="mt-2" :messages="$errors->get('copyright')" />
+                                <div class="col-span-3 sm:col-span-3">
+                                    <x-input-label for="copyright" value="{{ __('Copyright') }}" />
+                                    <x-text-icon-input id="copyright" type="text" class="mt-1 block w-full" name="copyright" :value="old('copyright', $data['copyright'])" placeholder="copyright" autocomplete="copyright" icon="copyright"/>
+                                    <x-input-error :messages="$errors->get('copyright')" class="mt-1" />
+                                </div>
+                                <div class="col-span-3 sm:col-span-3">
+                                    <x-input-label for="phone" value="{{ __('Phone') }}" />
+                                    <x-text-icon-input id="phone" type="text" class="mt-1 block w-full" name="phone" :value="old('phone', $data['phone'])" placeholder="phone" autocomplete="phone" icon="phone"/>
+                                    <x-input-error :messages="$errors->get('phone')" class="mt-1" />
                                 </div>
                                 <div class="col-span-3 sm:col-span-3">
                                     <x-input-label for="facebook" value="{{ __('Facebook') }}" />
