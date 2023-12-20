@@ -12,7 +12,7 @@
 @endforeach
 </select>
 
-@push('scripts')>
+@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 <script>
 new TomSelect('#{{ $id }}', {
