@@ -71,6 +71,7 @@ class SettingController extends Controller
             'twitter' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|integer'
         ]);
 
         try {
