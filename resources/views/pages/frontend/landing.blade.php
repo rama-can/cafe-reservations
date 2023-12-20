@@ -31,14 +31,14 @@
                                 <div class="phone">
                                     <i class="fa fa-phone"></i>
                                     <h4>Phone Numbers</h4>
-                                    <span><a href="#">080-090-0990</a><br><a href="#">080-090-0880</a></span>
+                                    <span><a href="https://wa.me/{{ $getTheme['phone'] }}">{{ $getTheme['phone'] }}</a></span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="message">
                                     <i class="fa fa-envelope"></i>
                                     <h4>Emails</h4>
-                                    <span><a href="#">{{ $getTheme['email'] }}</a></span>
+                                    <span><a href="mailto:{{ $getTheme['email'] }}">{{ $getTheme['email'] }}</a></span>
                                 </div>
                             </div>
                         </div>
