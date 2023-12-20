@@ -130,10 +130,17 @@ class ReservationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a reservation.
+     *
+     * @param string $id The ID of the reservation to be deleted.
+     * @return void
      */
     public function destroy(string $id)
     {
-        //
+        $hashId = $this->hashId->decode($id);
+        $reservation = Reservation::findOrFail($hashId);
+        $reservation->delete();
+        notify()->success('Reservation deleted successfully!');
+        return redirect()->route('admin.reservations.index');
     }
 }
