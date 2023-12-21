@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index') || request()->routeIs('admin.categories.create') || request()->routeIs('admin.categories.edit')">
                         {{ __('Category') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.chefs.index')" :active="request()->routeIs('admin.chefs.index') || request()->routeIs('admin.chefs.create') || request()->routeIs('admin.chefs.edit')">
+                        {{ __('Chef') }}
+                    </x-nav-link>
 
                     <x-nav-link-parent :href="'#'" :active="request()->routeIs('admin.settings.*')">
                         <x-slot name="name">{{ __('Settings') }}</x-slot>
