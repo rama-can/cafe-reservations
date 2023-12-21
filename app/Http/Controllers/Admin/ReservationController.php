@@ -37,7 +37,7 @@ class ReservationController extends Controller
                 ->orWhere('email', 'LIKE', '%' . $search . '%');
         }
 
-        if ($filter) { // Filter berdasarkan status jika ada
+        if ($filter) {
             $query->where('status', $filter);
         }
 
