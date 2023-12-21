@@ -29,12 +29,16 @@ class ReservationController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-
+        $filter = $request->input('status');
         $query = Reservation::with('category');
 
         if ($search) {
             $query->where('name', 'LIKE', '%' . $search . '%')
                 ->orWhere('email', 'LIKE', '%' . $search . '%');
+        }
+
+        if ($filter) { // Filter berdasarkan status jika ada
+            $query->where('status', $filter);
         }
 
         $reservations = $query->paginate(5);
@@ -44,6 +48,7 @@ class ReservationController extends Controller
             'hashId' => $this->hashId,
             'search' => $search,
             'isSearching' => $search ? true : false,
+            'isFiltering' => $filter ? true : false,
         ]);
     }
 

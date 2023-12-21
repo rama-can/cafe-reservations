@@ -16,7 +16,18 @@
                                     <h2 class="text-lg font-medium text-gray-800 dark:text-white">All Reservations</h2>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-center">
+                            {{-- <div class="flex items-center justify-center">
+                                <form action="{{ route('admin.reservations.index') }}" method="GET">
+                                    <select name="status" id="status" onchange="this.form.submit()" class="mt-1 block w-full border-gray-300 dark:border-gray-700 bg-slate-100 dark:bg-slate-900 dark:text-slate-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 text-sm rounded-md shadow-sm">
+                                        <option value="">All</option>
+                                        <option value="approved" {{ request('status') === 'approved' ? 'selected' : '' }}>Approved</option>
+                                        <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="rejected" {{ request('status') === 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                    </select>
+                                    @if ($isFiltering)
+                                        <a href="{{ route('admin.reservations.index') }}" class="ml-2 text-sm text-gray-600 dark:text-gray-400 mb-4">Clear Filter</a>
+                                    @endif
+                                </form>
                                 <form action="{{ route('admin.reservations.index') }}" method="GET">
                                     <div class="relative">
                                         <x-text-input type="text" name="search" placeholder="Search..." value="{{ $search }}" class="mt-1 block w-full" autocomplete="name" placeholder="Search.." />
@@ -30,7 +41,7 @@
                                         <a href="{{ route('admin.reservations.index') }}" class="ml-2 text-sm text-gray-600 dark:text-gray-400 mb-4">Clear Search</a>
                                     @endif
                                 </form>
-                            </div>
+                            </div> --}}
                             <div class="flex items-center mt-4 gap-x-3">
                                 <a href="{{ route('admin.foods.create') }}">
                                     <x-primary-button>
@@ -40,7 +51,33 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="flex flex-col mt-6">
+                        <div class="flex flex-col">
+                            <div class="flex items-start justify-start mb-4">
+                                <form action="{{ route('admin.reservations.index') }}" method="GET">
+                                    <select name="status" id="status" onchange="this.form.submit()" class="mt-1 block w-full border-gray-300 dark:border-gray-700 bg-slate-100 dark:bg-slate-900 dark:text-slate-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 text-sm rounded-md shadow-sm">
+                                        <option value="">All</option>
+                                        <option value="approved" {{ request('status') === 'approved' ? 'selected' : '' }}>Approved</option>
+                                        <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="rejected" {{ request('status') === 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                    </select>
+                                </form>
+                                <form action="{{ route('admin.reservations.index') }}" method="GET">
+                                    <div class="relative ml-4">
+                                        <x-text-input type="text" name="search" placeholder="Search..." value="{{ $search }}" class="mt-1 block w-full" autocomplete="name" placeholder="Search.." />
+                                        <span class="absolute inset-y-0 right-0 flex items-center">
+                                            <button type="submit" class="p-2 focus:outline-none focus:shadow-outline">
+                                                <x-tabler-search class=""/>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                                @if ($isSearching)
+                                    <a href="{{ route('admin.reservations.index') }}" class="ml-2 text-sm text-indigo-600 dark:text-indigo-400 mt-3">Clear Search</a>
+                                @endif
+                                @if ($isFiltering)
+                                    <a href="{{ route('admin.reservations.index') }}" class="ml-2 text-sm text-indigo-600 dark:text-indigo-400 mt-3">Clear Filter</a>
+                                @endif
+                            </div>
                             <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
                                 <div class="flex items-center justify-center min-w-full py-2 align-middle md:px-6 lg:px-8">
                                     <div class="overflow-x-auto border-2 border-gray-200 dark:border-gray-700 md:rounded-lg">
