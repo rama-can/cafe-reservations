@@ -16,6 +16,8 @@ class DashboardController extends Controller
             'food' => \App\Models\Food::count(),
             'category' => \App\Models\Category::count(),
             'user' => \App\Models\User::count(),
+            'reservation' => \App\Models\Reservation::count(),
+            'reservation_pending' => \App\Models\Reservation::where('status', 'pending')->count(),
         ]);
     }
 }
