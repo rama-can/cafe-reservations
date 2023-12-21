@@ -34,7 +34,7 @@
                                             <div class="left-list">
                                                 @php $count = 0 @endphp
                                                 @foreach ($item->foods as $food)
-                                                    @if ($count < 3)
+                                                    @if ($count < 4)
                                                         <div class="col-lg-12">
                                                             <div class="tab-item">
                                                                 <img src="{{ $food->image_url }}" alt="">
