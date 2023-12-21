@@ -73,10 +73,12 @@
                     <textarea name="message" rows="6" id="message" placeholder="Message" required="" class="form-control @error('message') is-invalid @enderror" wire:model="message"></textarea>
                 </div>
                 <div class="col-lg-12">
-                    <button type="submit" class="main-button-icon">Make A Reservation</button>
-                    <div wire:loading>
-                        Saving reservation...
-                    </div>
+                    <button type="submit" class="main-button-icon">
+                        Make A Reservation
+                        <div wire:loading class="spinner-border spinner-border-sm text-primary ml-2" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </button>
                 </div>
             </div>
         </form>
