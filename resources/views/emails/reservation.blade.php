@@ -8,6 +8,10 @@
 - Time		: {{ $time }}
 - Category	: {{ $category }}
 
+@if (isset($footer))
+{{ Illuminate\Mail\Markdown::parse($footer) }}
+@endif
+
 Thanks,<br>
 {{ $getTheme['site_name'] }}
 </x-mail::message>

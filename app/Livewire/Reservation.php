@@ -3,7 +3,8 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\Attributes\Rule;
+use App\Notifications\ReservationPending;
+use Illuminate\Support\Facades\Notification;
 
 class Reservation extends Component
 {
@@ -11,7 +12,7 @@ class Reservation extends Component
      * define public variable
      */
     public $name, $email, $phone_number, $date, $time, $quantity, $message, $category_id;
-
+    protected $notification;
 
     /**
      * List of add/edit form rules
@@ -20,7 +21,6 @@ class Reservation extends Component
         'name' => 'required|string|max:255',
         'email' => 'required|email',
         'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-        //'phone_number' => 'required|regex:/^(^\+62|0)(\d{8,15})$/',
         'date' => 'required|date',
         'time' => 'required|string|max:255',
         'quantity' => 'required|integer',
@@ -41,9 +41,8 @@ class Reservation extends Component
     public function store()
     {
         $this->validate();
-
         try {
-            \App\Models\Reservation::create([
+            $reservation = \App\Models\Reservation::create([
                 'name' => $this->name,
                 'email' => $this->email,
                 'phone_number' => $this->phone_number,
@@ -54,8 +53,9 @@ class Reservation extends Component
                 'status' => 'pending',
                 'category_id' => $this->category_id,
             ]);
-            session()->flash('success', 'Reservation created successfully');
             $this->reset();
+            $reservation->notify(new ReservationPending($reservation));
+            session()->flash('success', 'Reservation created successfully. Please check your email for further information regarding your reservation.');
         } catch (\Exception $e) {
             session()->flash('error', 'Something went wrong');
         }
