@@ -47,9 +47,9 @@
                                                             Name
                                                         </th>
 
-                                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        {{-- <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                             Status
-                                                        </th>
+                                                        </th> --}}
 
                                                         <th scope="col" class="relative py-3.5 px-4">
                                                             <span class="sr-only">Edit</span>
@@ -74,12 +74,12 @@
                                                                 {{ $data->name }}
                                                             </div>
                                                         </td>
-                                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                                        {{-- <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                             <span class="inline px-3 py-1 text-sm font-normal rounded-full
                                                                 {{ $data->is_active === 1 ? 'text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800' : 'text-red-500 gap-x-2 bg-red-100/60 dark:bg-gray-800' }}">
                                                                 {{ $data->is_active === 1 ? 'Active' : 'Not Active' }}
                                                             </span>
-                                                        </td>
+                                                        </td> --}}
 
                                                         <td class="px-4 py-4 text-xs font-semibold whitespace-nowrap flex items-center">
                                                             <a href="{{ route('admin.categories.edit', $hashId->encode($data->id)) }}" class="inline-block">
