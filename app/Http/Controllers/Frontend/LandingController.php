@@ -16,12 +16,12 @@ class LandingController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $food = \App\Models\Food::get();
+        $food = \App\Models\Food::where('is_available', true)->get();
         $categories = \App\Models\Category::with(['foods' => function ($query) {
-            $query->where('is_available', true) // Hanya makanan yang tersedia
-                  ->inRandomOrder(); // Mengambil makanan secara acak
+            $query->where('is_available', true)
+                  ->inRandomOrder();
         }])
-        ->where('is_active', true) // Hanya kategori yang aktif
+        ->where('is_active', true)
         ->take(6)
         ->get();
 
