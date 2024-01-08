@@ -42,14 +42,14 @@
                                     @endif
                                 </form>
                             </div> --}}
-                            <div class="flex items-center mt-4 gap-x-3">
+                            {{-- <div class="flex items-center mt-4 gap-x-3">
                                 <a href="{{ route('admin.foods.create') }}">
                                     <x-primary-button>
                                         <x-tabler-file-export class="w-5 h-5 mr-1" />
                                         <span>Export</span>
                                     </x-primary-button>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="flex flex-col">
                             <div class="flex items-start justify-start mb-4">
