@@ -30,7 +30,7 @@ class ReservationController extends Controller
     {
         $search = $request->input('search');
         $filter = $request->input('status');
-        $query = Reservation::with('category');
+        $query = Reservation::with('category')->orderBy('created_at', 'desc');
 
         if ($search) {
             $query->where('name', 'LIKE', '%' . $search . '%')
