@@ -18,8 +18,13 @@ class LandingController extends Controller
     {
         $food = \App\Models\Food::get();
         $categories = \App\Models\Category::with(['foods' => function ($query) {
-            $query->inRandomOrder();
-        }])->take(6)->get();
+            $query->where('is_available', true) // Hanya makanan yang tersedia
+                  ->inRandomOrder(); // Mengambil makanan secara acak
+        }])
+        ->where('is_active', true) // Hanya kategori yang aktif
+        ->take(6)
+        ->get();
+
         $chefs = \App\Models\Chef::get();
         return view('pages.frontend.landing', compact('food', 'categories', 'chefs'));
     }
