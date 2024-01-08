@@ -128,7 +128,7 @@
                                                     <tr>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                             <div class="text-gray-700 dark:text-white">
-                                                                {{ $data->id }}
+                                                                {{ ($reservations->currentPage() - 1) * $reservations->perPage() + $loop->iteration }}
                                                             </div>
                                                         </td>
                                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
